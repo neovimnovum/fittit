@@ -1,7 +1,9 @@
 import { combineReducers } from 'redux';
 
-const reducers = combineReducers({
+import liftReducer from './liftReducer';
 
+const reducers = combineReducers({
+  workout: liftReducer,
 });
 
 export default reducers;

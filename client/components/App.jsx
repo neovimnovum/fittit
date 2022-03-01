@@ -1,5 +1,7 @@
 import React from 'react';
 
+import LiftContainer from '../containers/LiftContainer';
+
 class App extends React.Component {
   constructor(props) {
     super(props);
@@ -7,12 +9,12 @@ class App extends React.Component {
 
   render() {
     return (
-      <p>
-        Hello all!
-      </p>
+      <>
+        <p>Rendered App</p>
+        <LiftContainer />
+      </>
     );
   }
 }
-
 
 export default App;
