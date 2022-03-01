@@ -1,12 +1,10 @@
 import React from 'react';
 import { render } from 'react-dom';
-
-const myName = 'Joey';
+import { provider } from 'react-redux';
+import { createStore } from 'redux';
+import App from './components/App';
 
 render(
-  <p>
-    This is a react app, and my name is
-    {myName}
-  </p>,
+  <App />,
   document.getElementById('root'),
 );
