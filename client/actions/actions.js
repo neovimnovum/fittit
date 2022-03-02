@@ -4,10 +4,9 @@ export const startWorkoutActionCreator = () => ({
   type: types.START_WORKOUT,
 });
 
-
 export const endWorkoutActionCreator = () => ({
   type: types.END_WORKOUT,
-}); 
+});
 
 export const addExerciseActionCreator = () => ({
   type: types.ADD_EXERCISE,
@@ -16,6 +15,7 @@ export const addExerciseActionCreator = () => ({
 export const removeExerciseActionCreator = () => ({
   type: types.REMOVE_EXERCISE,
 });
-export const logSetActionCreator = () => ({
+export const logSetActionCreator = (record) => ({
   type: types.LOG_SET,
+  payload: record,
 });
