@@ -18,6 +18,8 @@ function MainContainer(props) {
     startWorkout,
   } = props;
 
+  console.log(window.location.href);
+
   if (active) {
     return (
       <LiftContainer />

@@ -53,6 +53,7 @@ const workoutReducer = (state = initialState, action = {}) => {
   let record;
   switch (action.type) {
     case types.START_WORKOUT:
+      newState.lifts = action.payload;
       newState.active = true;
       newState.startTime = new Date();
       break;

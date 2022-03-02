@@ -1,8 +1,21 @@
 import * as types from '../constants/actionTypes';
+import regeneratorRuntime from 'regenerator-runtime';
 
-export const startWorkoutActionCreator = () => ({
+export const showNewWorkout = (response) => ({
   type: types.START_WORKOUT,
+  payload: response,
 });
+
+export const startWorkoutActionCreator = () => {
+  return function (dispatch) {
+    fetch('http://localhost:8080/api/workout')
+      .then((data) => data.json())
+      .then((data) => {
+        console.log(data);
+        return dispatch(showNewWorkout(data));
+      });
+  };
+};
 
 export const endWorkoutActionCreator = () => ({
   type: types.END_WORKOUT,
