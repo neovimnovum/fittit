@@ -9,6 +9,7 @@ const PORT = 3000;
 
 // app.use('/', express.static(path.resolve(__dirname, '../build')));
 // app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
+app.use(express.static(__dirname + '/public'));
 
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
