@@ -1,21 +1,19 @@
 import * as types from '../constants/actionTypes';
-import regeneratorRuntime from 'regenerator-runtime';
 
-export const showNewWorkout = (response) => ({
+const SERVER_URL = 'http://localhost:8080/api/';
+
+export const startWorkoutActionCreator = (response) => ({
   type: types.START_WORKOUT,
   payload: response,
 });
 
-export const startWorkoutActionCreator = () => {
-  return function (dispatch) {
-    fetch('http://localhost:8080/api/workout')
+export const fetchDataAndCreateAction = (actionCreator, options = {}, endpoint = '') => (
+  function (dispatch) {
+    fetch(SERVER_URL + endpoint, options)
       .then((data) => data.json())
-      .then((data) => {
-        console.log(data);
-        return dispatch(showNewWorkout(data));
-      });
-  };
-};
+      .then((data) => dispatch(actionCreator(data)));
+  }
+);
 
 export const endWorkoutActionCreator = () => ({
   type: types.END_WORKOUT,
@@ -25,10 +23,26 @@ export const addExerciseActionCreator = () => ({
   type: types.ADD_EXERCISE,
 });
 
-export const removeExerciseActionCreator = () => ({
+export const removeExerciseActionCreator = (responseData) => ({
   type: types.REMOVE_EXERCISE,
+  payload: responseData,
 });
 export const logSetActionCreator = (record) => ({
   type: types.LOG_SET,
   payload: record,
+});
+
+export const viewHistoryActionCreator = (history) => ({
+  type: types.VIEW_HISTORY,
+  payload: history,
+});
+
+export const viewDetailsActionCreator = (sets) => ({
+  type: types.VIEW_DETAILS,
+  payload: sets,
+});
+
+export const updateSetActionCreator = (set) => ({
+  type: types.UPDATE_SET,
+  payload: set,
 });

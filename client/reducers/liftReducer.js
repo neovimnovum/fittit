@@ -2,64 +2,37 @@ import * as types from '../constants/actionTypes';
 
 const initialState = {
   active: false,
+  browsing: false,
   startTime: null,
-  lifts: [
-    {
-      id: 15,
-      name: 'Hammer Curls',
-      sets: 4,
-      reps: 12,
-      weight: 35,
-      record: [],
-    },
-    {
-      id: 77,
-      name: 'Bench Press',
-      sets: 4,
-      reps: 8,
-      weight: 155,
-      record: [],
-    },
-    {
-      id: 1123,
-      name: 'Dumbell Romanian Deadlift',
-      sets: 3,
-      reps: 10,
-      weight: 50,
-      record: [],
-    },
-    {
-      id: 4,
-      name: 'Sit Ups',
-      sets: 5,
-      reps: 16,
-      weight: 0,
-      record: [],
-    },
-    {
-      id: 3,
-      name: 'Dumbbell Shoulder Press',
-      sets: 3,
-      reps: 8,
-      weight: 40,
-      record: [],
-    },
-  ],
+  lifts: [],
 };
 
 const workoutReducer = (state = initialState, action = {}) => {
-  let newState = { ...state };
+  const newState = { ...state };
   let lift;
+  let start;
   let record;
   switch (action.type) {
     case types.START_WORKOUT:
       newState.lifts = action.payload;
       newState.active = true;
-      newState.startTime = new Date();
+      start = new Date();
+      newState.startTime = start.toISOString();
       break;
     case types.END_WORKOUT:
+      newState.active = false;
+      newState.browsing = false;
+      break;
     case types.ADD_EXERCISE:
     case types.REMOVE_EXERCISE:
+      newState.lifts = [...newState.lifts];
+      newState.lifts.splice(action.payload.index, 1);
+      break;
+    case types.UPDATE_SET:
+      newState.lifts = [...newState.lifts];
+      newState.lifts[action.payload.index].reps = action.payload.reps;
+      newState.lifts[action.payload.index].weight = action.payload.weight;
+      break;
     case types.LOG_SET:
       newState.lifts = [...newState.lifts];
       lift = newState.lifts[action.payload.index];
@@ -72,8 +45,15 @@ const workoutReducer = (state = initialState, action = {}) => {
         weight: lift.weight,
       });
       break;
+    case types.VIEW_HISTORY:
+      newState.browsing = true;
+      newState.lifts = action.payload;
+      break;
+    case types.VIEW_DETAILS:
+      newState.active = true;
+      newState.lifts = action.payload;
+      break;
     default: {
-      console.log(state);
       return state;
     }
   }

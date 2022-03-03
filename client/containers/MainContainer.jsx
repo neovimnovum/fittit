@@ -7,40 +7,84 @@ import * as actions from '../actions/actions';
 
 const mapStateToProps = (state) => ({
   active: state.workout.active,
+  browsing: state.workout.browsing,
+  lifts: state.workout.lifts,
 });
 const mapDispatchToProps = (dispatch) => ({
-  startWorkout: () => dispatch(actions.startWorkoutActionCreator()),
+  fetch: (actionCreator, opts, endpoint) => {
+    dispatch(actions.fetchDataAndCreateAction(actionCreator, opts, endpoint));
+  },
 });
 
 function MainContainer(props) {
   const {
     active,
-    startWorkout,
+    browsing,
+    fetch,
+    lifts,
   } = props;
-
-  console.log(window.location.href);
 
   if (active) {
     return (
       <LiftContainer />
     );
   }
+  if (browsing) {
+    const recentWorkouts = [];
+    lifts.forEach((workout) => {
+      recentWorkouts.push(
+        <NavComponent
+          perform={fetch}
+          action={actions.viewDetailsActionCreator}
+          opts={{}}
+          endpoint={`workouts/${workout._id}`}
+          buttonType={`${workout.username} at ${workout.end_time}`}
+          key={`workout${workout._id}`}
+        />,
+      );
+    });
+    return (
+      recentWorkouts
+    );
+  }
   return (
     <>
-      <NavComponent perform={startWorkout} buttonType="Start Workout" />
-      <NavComponent perform={'dummy'} buttonType="Workout Log" />
-      <NavComponent perform={'dummy'} buttonType="Log In" />
+      <NavComponent
+        perform={fetch}
+        action={actions.startWorkoutActionCreator}
+        opts={{}}
+        endpoint="workout"
+        buttonType="Start Workout"
+      />
+      <NavComponent
+        perform={fetch}
+        action={actions.viewHistoryActionCreator}
+        opts={{}}
+        endpoint="workouts"
+        buttonType="View Workout History"
+      />
+      <NavComponent
+        perform={fetch}
+        action={actions.startWorkoutActionCreator}
+        opts={{}}
+        endpoint="workout"
+        buttonType="Log In"
+      />
     </>
   );
 }
 
 MainContainer.defaultProps = {
   active: false,
+  browsing: false,
+  lifts: [],
 };
 
 MainContainer.propTypes = {
   active: PropTypes.bool,
-  startWorkout: PropTypes.func.isRequired,
+  fetch: PropTypes.func.isRequired,
+  browsing: PropTypes.bool,
+  lifts: PropTypes.array,
 };
 
 export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);

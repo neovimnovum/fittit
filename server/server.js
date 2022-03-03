@@ -3,22 +3,18 @@ const express = require('express');
 
 const app = express();
 
-const workoutController = require('./controllers/workoutController');
+const apirouter = require('./routes/apirouter');
 
 const PORT = 3000;
 
 // app.use('/', express.static(path.resolve(__dirname, '../build')));
 // app.get('/', (req, res) => res.status(200).sendFile(path.join(__dirname, '../index.html')));
 
-app.get('/api/workout', workoutController.generateWorkout, (req, res) => {
-  console.log('api path');
-  return res.status(200).json(res.locals.workout);
-});
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
 
-app.get('/workout', workoutController.generateWorkout, (req, res) => {
-  console.log('root path');
-  return res.status(200).json(res.locals.workout);
-});
+app.use('/', apirouter);
+app.use('/api', apirouter);
 
 app.use('/', (req, res) => {
   return res.sendStatus(404);
