@@ -9,8 +9,8 @@ class App extends React.Component {
 
   render() {
     return (
-      <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
-        Workout App
+      <div className="mainContainer">
+        MyFitnessFriend
         <MainContainer />
       </div>
     );

@@ -46,7 +46,7 @@ function LiftContainer(props) {
       );
     });
     data.push(
-      <div key="uniquediv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
+      <div className="finisher" key="uniquediv" style={{ display: 'flex', flexDirection: 'column', alignItems: 'center' }}>
         <NavComponent
           perform={fetch}
           action={actions.endWorkoutActionCreator}

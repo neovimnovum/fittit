@@ -1,6 +1,6 @@
 import * as types from '../constants/actionTypes';
 
-const SERVER_URL = 'http://localhost:8080/api/';
+const SERVER_URL = window.location.href + 'api/'; 
 
 export const startWorkoutActionCreator = (response) => ({
   type: types.START_WORKOUT,

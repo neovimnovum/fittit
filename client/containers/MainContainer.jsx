@@ -38,7 +38,7 @@ function MainContainer(props) {
           action={actions.viewDetailsActionCreator}
           opts={{}}
           endpoint={`workouts/${workout._id}`}
-          buttonType={`${workout.username} at ${workout.end_time}`}
+          buttonType={`${workout.username}: ${(new Date(workout.end_time)).toString()}`}
           key={`workout${workout._id}`}
         />,
       );
