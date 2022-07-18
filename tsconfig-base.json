@@ -1,12 +1,9 @@
 {
   "compilerOptions": {
-    "outDir": "./build/",
     "sourceMap": true,
     "strict": true,
     "strictNullChecks": true,
     "module": "nodenext",
-    "jsx": "react",
-    "target": "es6",
     "esModuleInterop": true,
     "importHelpers": true,
     "skipLibCheck": true,
@@ -24,9 +21,5 @@
     "importsNotUsedAsValues": "error",
     "checkJs": true,
     "allowJs": true
-  },
-  "include" : [
-    "./client/",
-    "./server/"
-  ]
+  }
 }

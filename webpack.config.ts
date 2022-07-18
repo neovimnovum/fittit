@@ -5,14 +5,14 @@ import 'webpack-dev-server';
 
 const config: Configuration = {
   mode: process.env['NODE_ENV'] === 'production' ? 'production' : 'development',
-  entry: './client/index.tsx',
+  entry: './index.tsx',
+  context: path.resolve(__dirname, 'client'),
   devtool: process.env['NODE_ENV'] === 'production' ? false : 'source-map',
   resolve: {
     extensions: ['.js', '.jsx', '.ts', '.tsx'],
   },
   output: {
-    path: path.resolve(__dirname, 'build'),
-    publicPath: '/',
+    path: path.resolve(__dirname, 'client/build'),
   },
   module: {
     rules: [
@@ -22,7 +22,7 @@ const config: Configuration = {
         loader: 'ts-loader',
       },
       {
-        enforce: "pre",
+        enforce: 'pre',
         test: /\.js$/,
         exclude: /node_modules/,
         loader: 'source-map-loader',
@@ -38,13 +38,13 @@ const config: Configuration = {
     proxy: {
       '/api': {
         target: 'http://localhost:3000',
-      } 
+      },
     },
     static: {
-      directory: path.resolve(__dirname, 'build'),
+      directory: path.resolve(__dirname, 'client/build'),
       publicPath: '/',
     },
   },
-  plugins: [new HtmlWebpackPlugin({ template: './index.html' })],
+  plugins: [new HtmlWebpackPlugin({ template: 'index.html' })],
 };
 export default config;

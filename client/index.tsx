@@ -1,4 +1,3 @@
-import React from 'react';
 import './styles.css';
 import { render } from 'react-dom';
 import { Provider } from 'react-redux';
@@ -7,10 +6,10 @@ import workoutReducer from './reducers/liftReducer';
 import App from './App';
 
 const store = configureStore({
-    reducer: {
-        workout: workoutReducer,
-      }
-  });
+  reducer: {
+    workout: workoutReducer,
+  },
+});
 
 render(
   <Provider store={store}>
