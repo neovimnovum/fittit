@@ -1,0 +1,65 @@
+body {
+  background-color: whitesmoke;
+  font-size: 10vw;
+}
+
+#root {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: stretch;
+  height: 85vh;
+}
+
+button {
+  font-size: 8vw;
+  border-radius: 2vw;
+  background-color: CornflowerBlue;
+  color: WhiteSmoke;
+}
+
+label {
+  display: flex;
+  flex-direction: row;
+  align-items: center;
+  font-size: 6vw;
+  justify-content: space-around;
+}
+
+button:hover {
+  background-color: DodgerBlue;
+  border: 1px solid black;
+}
+
+.mainContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  justify-content: space-between;
+  height: 100%;
+  text-align: center;
+}
+
+h3 {
+  margin: 0;
+  font-size: 8vw;
+}
+
+button {
+  height: 25%;
+}
+
+input {
+  font-size: 5vw;
+}
+
+form button {
+  height: 10vh;
+}
+.finisher button {
+  height: 15vh;
+}
+
+.historyButton button {
+  font-size: 6vw;
+}
