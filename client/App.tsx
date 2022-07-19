@@ -1,20 +1,12 @@
-import React from 'react';
-
 import MainContainer from './containers/MainContainer';
 
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
-  render() {
-    return (
-      <div className="mainContainer">
-        MyFitnessFriend
-        <MainContainer />
-      </div>
-    );
-  }
+function App() {
+  return (
+    <div className="mainContainer">
+      Fittit
+      <MainContainer />
+    </div>
+  );
 }
 
 export default App;

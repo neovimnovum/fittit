@@ -1,28 +1,12 @@
-import React from 'react';
-import { connect } from 'react-redux';
-import PropTypes from 'prop-types';
 import NavComponent from '../components/NavComponent';
 import LiftContainer from './LiftContainer';
-import * as actions from '../actions/actions';
+import { viewDetailsActionCreator, startWorkoutActionCreator, viewHistoryActionCreator } from '../actions/actions';
+import { useAppSelector } from '../hooks';
 
-const mapStateToProps = (state) => ({
-  active: state.workout.active,
-  browsing: state.workout.browsing,
-  lifts: state.workout.lifts,
-});
-const mapDispatchToProps = (dispatch) => ({
-  fetch: (actionCreator, opts, endpoint) => {
-    dispatch(actions.fetchDataAndCreateAction(actionCreator, opts, endpoint));
-  },
-});
-
-function MainContainer(props) {
-  const {
-    active,
-    browsing,
-    fetch,
-    lifts,
-  } = props;
+function MainContainer() {
+  const active = useAppSelector((state) => state.workout.active);
+  const browsing = useAppSelector((state) => state.workout.browsing);
+  const lifts = useAppSelector((state) => state.workout.lifts);
 
   if (active) {
     return (
@@ -30,12 +14,11 @@ function MainContainer(props) {
     );
   }
   if (browsing) {
-    const recentWorkouts = [];
+    const recentWorkouts: JSX.Element[] = [];
     lifts.forEach((workout) => {
       recentWorkouts.push(
         <NavComponent
-          perform={fetch}
-          action={actions.viewDetailsActionCreator}
+          action={viewDetailsActionCreator}
           opts={{}}
           endpoint={`workouts/${workout._id}`}
           buttonType={`${workout.username}: ${(new Date(workout.end_time)).toString()}`}
@@ -44,28 +27,27 @@ function MainContainer(props) {
       );
     });
     return (
-      recentWorkouts
+      <>
+        recentWorkouts
+      </>
     );
   }
   return (
     <>
       <NavComponent
-        perform={fetch}
-        action={actions.startWorkoutActionCreator}
+        action={startWorkoutActionCreator}
         opts={{}}
         endpoint="workout"
         buttonType="Start Workout"
       />
       <NavComponent
-        perform={fetch}
-        action={actions.viewHistoryActionCreator}
+        action={viewHistoryActionCreator}
         opts={{}}
         endpoint="workouts"
         buttonType="View Workout History"
       />
       <NavComponent
-        perform={fetch}
-        action={actions.startWorkoutActionCreator}
+        action={startWorkoutActionCreator}
         opts={{}}
         endpoint="workout"
         buttonType="Log In"
@@ -74,17 +56,4 @@ function MainContainer(props) {
   );
 }
 
-MainContainer.defaultProps = {
-  active: false,
-  browsing: false,
-  lifts: [],
-};
-
-MainContainer.propTypes = {
-  active: PropTypes.bool,
-  fetch: PropTypes.func.isRequired,
-  browsing: PropTypes.bool,
-  lifts: PropTypes.array,
-};
-
-export default connect(mapStateToProps, mapDispatchToProps)(MainContainer);
+export default MainContainer;

@@ -1,63 +1,106 @@
-import * as types from '../constants/actionTypes';
+import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+// import type { RootState } from '../store';
 
-const initialState = {
+interface LiftSet {
+  _id?: string,
+  reps: number,
+  weight: number,
+  exercise_id?: string,
+  workout_id?: string,
+}
+
+interface IndexedSet extends LiftSet {
+  index: number,
+}
+interface Exercise {
+  name: string,
+  id: string,
+  sets: number,
+  weight: number,
+  reps: number,
+  record: LiftSet[]
+}
+interface Workout {
+  _id: string,
+  username: string,
+  start_time: string,
+  end_time: string,
+}
+
+interface LiftState {
+  active: boolean,
+  browsing: boolean,
+  startTime: null | string,
+  lifts: Exercise[],
+}
+
+const initialState: LiftState = {
   active: false,
   browsing: false,
   startTime: null,
   lifts: [],
 };
 
-const workoutReducer = (state = initialState, action = {}) => {
-  const newState = { ...state };
-  let lift;
-  let start;
-  let record;
-  switch (action.type) {
-    case types.START_WORKOUT:
-      newState.lifts = action.payload;
-      newState.active = true;
-      start = new Date();
-      newState.startTime = start.toISOString();
-      break;
-    case types.END_WORKOUT:
-      newState.active = false;
-      newState.browsing = false;
-      break;
-    case types.ADD_EXERCISE:
-    case types.REMOVE_EXERCISE:
-      newState.lifts = [...newState.lifts];
-      newState.lifts.splice(action.payload.index, 1);
-      break;
-    case types.UPDATE_SET:
-      newState.lifts = [...newState.lifts];
-      newState.lifts[action.payload.index].reps = action.payload.reps;
-      newState.lifts[action.payload.index].weight = action.payload.weight;
-      break;
-    case types.LOG_SET:
-      newState.lifts = [...newState.lifts];
-      lift = newState.lifts[action.payload.index];
-      lift.sets = action.payload.sets;
-      lift.reps = action.payload.reps;
-      lift.weight = action.payload.weight;
-      lift.record = [...lift.record];
-      lift.record.push({
-        reps: lift.reps,
-        weight: lift.weight,
-      });
-      break;
-    case types.VIEW_HISTORY:
-      newState.browsing = true;
-      newState.lifts = action.payload;
-      break;
-    case types.VIEW_DETAILS:
-      newState.active = true;
-      newState.lifts = action.payload;
-      break;
-    default: {
-      return state;
-    }
-  }
-  return newState;
-};
+export const workoutSlice = createSlice({
+  name: 'workout',
+  initialState,
+  reducers: {
+    START_WORKOUT: (state, action: PayloadAction<Exercise[]>) => {
+      state.lifts = action.payload;
+      state.active = true;
+      state.startTime = (new Date()).toISOString();
+    },
+    END_WORKOUT: (state) => {
+      state.active = false;
+      state.browsing = false;
+    },
+    ADD_EXERCISE: () => {
 
-export default workoutReducer;
+    },
+    REMOVE_EXERCISE: (state, action: PayloadAction<{ index: number }>) => {
+      state.lifts.splice(action.payload.index, 1);
+    },
+    UPDATE_SET: (state, action: PayloadAction<IndexedSet>) => {
+      const target = state.lifts[action.payload.index];
+      if (target) {
+        target.reps = action.payload.reps;
+        target.weight = action.payload.weight;
+      }
+    },
+    LOG_SET: (state, action: PayloadAction<{
+      index: number, weight: number, reps: number, sets: number
+    }>) => {
+      const lift = state.lifts[action.payload.index];
+      if (lift) {
+        lift.sets = action.payload.sets;
+        lift.reps = action.payload.reps;
+        lift.weight = action.payload.weight;
+        lift.record.push({
+          reps: lift.reps,
+          weight: lift.weight,
+        });
+      }
+    },
+    VIEW_HISTORY: (state /* action: PayloadAction<Workout[]> */) => {
+      state.browsing = true;
+      // state.lifts = action.payload;
+    },
+    VIEW_DETAILS: (state, action: PayloadAction<Exercise[]>) => {
+      state.active = true;
+      state.lifts = action.payload;
+    },
+  },
+});
+
+export const {
+  VIEW_HISTORY,
+  VIEW_DETAILS,
+  LOG_SET,
+  UPDATE_SET,
+  REMOVE_EXERCISE,
+  ADD_EXERCISE,
+  END_WORKOUT,
+  START_WORKOUT,
+} = workoutSlice.actions;
+
+export default workoutSlice.reducer;

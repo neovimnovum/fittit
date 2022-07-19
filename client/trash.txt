@@ -1,0 +1,5 @@
+const mapDispatchToProps = (dispatch) => ({
+  fetch: (actionCreator, opts, endpoint) => {
+    dispatch(fetchDataAndCreateAction(actionCreator, opts, endpoint));
+  },
+});
