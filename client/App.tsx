@@ -1,6 +1,10 @@
 import { Routes, Route } from 'react-router-dom';
-import MainContainer from './containers/MainContainer';
-import SessionContainer from './containers/SessionContainer';
+import {
+  MainContainer,
+  SessionContainer,
+  HistoryContainer,
+  LoginContainer,
+} from './containers/Containers';
 
 function App() {
   return (

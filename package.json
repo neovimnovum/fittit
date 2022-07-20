@@ -20,6 +20,7 @@
   },
   "homepage": "https://github.com/neovimnovum/workout-app#readme",
   "devDependencies": {
+    "@types/react": "^18.0.15",
     "@typescript-eslint/eslint-plugin": "^5.30.7",
     "@typescript-eslint/parser": "^5.30.7",
     "css-loader": "^6.7.1",
@@ -44,7 +45,6 @@
   },
   "dependencies": {
     "@reduxjs/toolkit": "^1.8.3",
-    "@types/react": "^18.0.15",
     "@types/react-dom": "^18.0.6",
     "express": "^4.18.1",
     "pg": "^8.7.3",

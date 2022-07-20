@@ -3,3 +3,35 @@ const mapDispatchToProps = (dispatch) => ({
     dispatch(fetchDataAndCreateAction(actionCreator, opts, endpoint));
   },
 });
+
+agenda.forEach((set, index) => {
+      data.push(
+        <Set
+          key={`Set${set._id}`}
+          id={set._id}
+          ind={index}
+          name={set.name}
+          reps={set.reps}
+          weight={set.weight}
+          perform={fetch}
+        />,
+      );
+    });
+    data.push(
+      <NavComponent
+        key="uniquedeleter"
+        perform={fetch}
+        action={actions.endWorkoutActionCreator}
+        opts={{
+          method: 'DELETE',
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json',
+          },
+        }}
+        endpoint={`workouts/${agenda[0].workout_id}`}
+        buttonType="Delete Workout"
+      />,
+    );
+  }
+

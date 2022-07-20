@@ -1,4 +1,3 @@
-import React from 'react';
 import PropTypes from 'prop-types';
 
 function Exercise(props) {
@@ -42,16 +41,5 @@ function Exercise(props) {
     </form>
   );
 }
-
-Exercise.propTypes = {
-  name: PropTypes.string,
-  record: PropTypes.number,
-  sets: PropTypes.number,
-  reps: PropTypes.number,
-  weight: PropTypes.number,
-  id: PropTypes.number,
-  logSet: PropTypes.func.isRequired,
-  ind: PropTypes.number.isRequired,
-};
 
 export default Exercise;

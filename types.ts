@@ -23,6 +23,7 @@ export interface Workout {
 export interface SetRecord extends Pick<Set, 'weight' | 'reps'> {}
 
 export interface Routine extends Pick<Exercise, 'id' | 'name'>, Pick<Set, 'weight' | 'reps'> {
+  sets: number,
   record: SetRecord[],
 }
 
