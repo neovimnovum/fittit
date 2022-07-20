@@ -1,5 +1,5 @@
 import { configureStore } from '@reduxjs/toolkit';
-import workoutReducer from './reducers/liftReducer';
+import workoutReducer from './lifts/liftSlice';
 
 const store = configureStore({
   reducer: {
