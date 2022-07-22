@@ -7,36 +7,33 @@ import type {
 import dummyState from './dummyData';
 // import type { RootState } from '../store';
 
+interface Index {
+  index: number,
+}
+
 const initialState: Session = dummyState;
 
 export const workoutSlice = createSlice({
   name: 'workout',
   initialState,
   reducers: {
-    START_WORKOUT: (state, action: PayloadAction<Routine[]>) => {
+    startWorkout: (state, action: PayloadAction<Routine[]>) => {
       state.itinerary = action.payload;
       state.startTime = (new Date()).toISOString();
     },
-    END_WORKOUT: () => {
+    endWorkout: () => {
     },
-    ADD_EXERCISE: () => {
+    addExercise: () => {
     },
-    REMOVE_EXERCISE: (state, action: PayloadAction<number>) => {
+    removeExercise: (state, action: PayloadAction<number>) => {
       state.itinerary.splice(action.payload, 1);
     },
-    ADJUST_SET: (state, action: PayloadAction<SetRecord & { index: number }>) => {
-      const target = state.itinerary[action.payload.index];
-      if (target) {
-        target.reps = action.payload.reps;
-        target.weight = action.payload.weight;
-      }
-    },
-    LOG_SET: (state, action: PayloadAction<number>) => {
-      const lift = state.itinerary[action.payload];
+    logSet: (state, action: PayloadAction<SetRecord & Index>) => {
+      const lift = state.itinerary[action.payload.index];
       if (lift) {
         lift.record.push({
-          reps: lift.reps,
-          weight: lift.weight,
+          reps: action.payload.reps,
+          weight: action.payload.weight,
         });
       }
     },
@@ -44,12 +41,11 @@ export const workoutSlice = createSlice({
 });
 
 export const {
-  LOG_SET,
-  ADJUST_SET,
-  REMOVE_EXERCISE,
-  ADD_EXERCISE,
-  END_WORKOUT,
-  START_WORKOUT,
+  startWorkout,
+  endWorkout,
+  addExercise,
+  removeExercise,
+  logSet,
 } = workoutSlice.actions;
 
 export default workoutSlice.reducer;

@@ -1,48 +1,56 @@
 import type { Routine } from '@shared/types';
-import { useAppSelector } from '../hooks';
+import { useState } from 'react';
+import { useAppSelector, useAppDispatch } from '../hooks';
+import { logSet } from '../lifts/liftSlice';
 
 interface ExerciseProps {
   index: number
 }
+
 function Exercise({ index }: ExerciseProps) {
-  const {
-    id, name, weight, reps, sets, record,
-  }: Routine = useAppSelector(
+  const routine: Routine = useAppSelector(
     (state) => {
-      const routine = state.workout.itinerary[index];
-      if (routine) {
-        return routine;
+      const item = state.workout.itinerary[index];
+      if (item) {
+        return item;
       }
       return {
         id: -1, name: 'error', weight: -1, reps: -1, sets: -1, record: [{ weight: -1, reps: -1 }],
       };
     },
   );
+
+  const dispatch = useAppDispatch();
+
+  const [sets, setSets] = useState(routine.sets);
+  const [reps, setReps] = useState(routine.reps);
+  const [weight, setWeight] = useState(routine.weight);
+
   return (
     <form
       style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}
       onSubmit={(e) => {
         e.preventDefault();
-        // Thunk here
+        dispatch(logSet({ index, reps, weight }));
       }}
     >
-      <h3>{name}</h3>
-      <label htmlFor={`sets${id}`}>
+      <h3>{routine.name}</h3>
+      <label htmlFor={`sets${routine.id}`}>
         Sets:
+        {routine.record.length}
         {' '}
-        {record}
         /
-        <input id={`sets${id}`} defaultValue={sets} type="number" />
+        <input id={`sets${routine.id}`} value={sets} onChange={(e) => setSets(e.target.valueAsNumber)} type="number" />
       </label>
-      <label htmlFor={`reps${id}`}>
+      <label htmlFor={`reps${routine.id}`}>
         Reps:
         {' '}
-        <input id={`reps${id}`} defaultValue={reps} type="number" />
+        <input id={`reps${routine.id}`} value={reps} onChange={(e) => setReps(e.target.valueAsNumber)} type="number" />
       </label>
-      <label htmlFor={`weight${id}`}>
+      <label htmlFor={`weight${routine.id}`}>
         Weight:
         {' '}
-        <input id={`weight${id}`} defaultValue={weight} type="number" />
+        <input id={`weight${routine.id}`} value={weight} onChange={(e) => setWeight(e.target.valueAsNumber)} type="number" />
       </label>
       <button type="submit">Log Set</button>
     </form>
