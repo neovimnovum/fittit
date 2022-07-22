@@ -1,4 +1,4 @@
-import type { Session, Routine } from '../../types';
+import type { Session, Routine } from '@shared/types';
 
 const chinups: Routine = {
   id: 1,

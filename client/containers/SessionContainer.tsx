@@ -1,9 +1,8 @@
 import { shallowEqual } from 'react-redux';
+import type { Routine } from '@shared/types';
 import Exercise from '../components/Exercise';
 import NavComponent from '../components/NavComponent';
 import { useAppSelector } from '../hooks';
-
-import type { Routine } from '../../types';
 
 export default function SessionContainer() {
   const itineraryIds: number[] = useAppSelector(
@@ -11,7 +10,7 @@ export default function SessionContainer() {
     shallowEqual,
   );
   const data: JSX.Element[] = itineraryIds.map(
-    (id: number, index: number) => <Exercise ind={index} key={id} />,
+    (id: number, index: number) => <Exercise index={index} key={id} />,
   );
   return (
     <>

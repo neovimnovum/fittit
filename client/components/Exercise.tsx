@@ -1,19 +1,21 @@
-function Exercise(props) {
+import type { Routine } from '@shared/types';
+import { useAppSelector } from '../hooks';
+
+interface ExerciseProps {
+  index: number
+}
+function Exercise({ index }: ExerciseProps) {
   const {
-    name, record, sets, reps, weight, id, ind, logSet,
-  } = props;
+    id, name, weight, reps, sets, record,
+  }: Routine = useAppSelector(
+    (state) => state.workout.itinerary[index],
+  );
   return (
     <form
       style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}
       onSubmit={(e) => {
         e.preventDefault();
-        const lift = e.target;
-        const snapshot = {};
-        snapshot.index = ind;
-        snapshot.sets = lift.querySelector(`#sets${id}`).valueAsNumber;
-        snapshot.weight = lift.querySelector(`#weight${id}`).valueAsNumber;
-        snapshot.reps = lift.querySelector(`#reps${id}`).valueAsNumber;
-        return logSet(snapshot);
+        // Thunk here
       }}
     >
       <h3>{name}</h3>

@@ -3,7 +3,10 @@
   "compilerOptions": {
     "outDir": "./build/",
     "jsx": "react-jsx",
-    "target": "es6"
+    "target": "es6",
+    "paths": {
+      "@shared/*": ["../shared/*"]
+    }
   },
   "include" : [
     "./",

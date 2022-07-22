@@ -9,7 +9,7 @@ interface NavProps {
 
 function NavButton({ endpoint, name }: NavProps) {
   const navigate: NavigateFunction = useNavigate();
-  async function handleClick(event: SyntheticMouseEvent<HTMLButtonElement>) {
+  function handleClick(event: SyntheticMouseEvent<HTMLButtonElement>) {
     event.preventDefault();
     // Call our Redux-thunk async event here.
     navigate(`/${endpoint}`);

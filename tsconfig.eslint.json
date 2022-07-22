@@ -5,6 +5,7 @@
   },
   "include": [
     "./.eslintrc.cjs",
-    "./*"
+    "./*",
+    "./shared/*"
   ]
 }
