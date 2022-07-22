@@ -1,23 +1,3 @@
-// For array access of Redux store
-type Indices<L extends number, T extends number[] = []> =
-  T['length'] extends L ? T[number] : Indices<L, [T['length'], ...T]>;
-
-type ItineraryLengthAtLeast<T extends readonly Routine[], L extends number> =
-  Pick<Required<T>, Indices<L>>;
-
-type RecordLengthAtLeast<T extends readonly SetRecord[], L extends number> =
-  Pick<Required<T>, Indices<L>>;
-
-export function itineraryHasLengthAtLeast<T extends readonly Routine[], L extends number>(array: T, length: L):
-array is T & ItineraryLengthAtLeast<T, L> {
-  return array.length >= length;
-}
-
-export function recordHasLengthAtLeast<T extends readonly SetRecord[], L extends number>(array: T, length: L):
-array is T & RecordLengthAtLeast<T, L> {
-  return array.length >= length;
-}
-
 // Data model
 export interface Exercise {
   id: number,

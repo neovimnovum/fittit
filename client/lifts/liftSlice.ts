@@ -1,5 +1,4 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { itineraryHasLengthAtLeast } from '@shared/types';
 import type {
   SetRecord,
   Routine,
@@ -8,7 +7,6 @@ import type {
 import dummyState from './dummyData';
 // import type { RootState } from '../store';
 
-itineraryHasLengthAtLeast(dummyState.itinerary, dummyState.itinerary.length);
 const initialState: Session = dummyState;
 
 export const workoutSlice = createSlice({

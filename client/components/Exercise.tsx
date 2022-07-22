@@ -8,7 +8,15 @@ function Exercise({ index }: ExerciseProps) {
   const {
     id, name, weight, reps, sets, record,
   }: Routine = useAppSelector(
-    (state) => state.workout.itinerary[index],
+    (state) => {
+      const routine = state.workout.itinerary[index];
+      if (routine) {
+        return routine;
+      }
+      return {
+        id: -1, name: 'error', weight: -1, reps: -1, sets: -1, record: [{ weight: -1, reps: -1 }],
+      };
+    },
   );
   return (
     <form
