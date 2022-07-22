@@ -1,4 +1,5 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
+import dummyState from './dummyData';
 import type {
   SetRecord,
   Routine,
@@ -6,11 +7,7 @@ import type {
 } from '../../types';
 // import type { RootState } from '../store';
 
-const initialState: Session = {
-  startTime: (new Date()).toISOString(),
-  endTime: (new Date()).toISOString(),
-  itinerary: [],
-};
+const initialState: Session = dummyState;
 
 export const workoutSlice = createSlice({
   name: 'workout',

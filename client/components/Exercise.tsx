@@ -1,7 +1,4 @@
-import PropTypes from 'prop-types';
-
 function Exercise(props) {
-  console.log(props);
   const {
     name, record, sets, reps, weight, id, ind, logSet,
   } = props;

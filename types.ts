@@ -20,13 +20,16 @@ export interface Workout {
 
 // Not used in the data model, but on frontend and for returning from Server:
 
-export interface SetRecord extends Pick<Set, 'weight' | 'reps'> {}
+export interface SetRecord {
+  weight: number,
+  reps: number,
+}
 
-export interface Routine extends Pick<Exercise, 'id' | 'name'>, Pick<Set, 'weight' | 'reps'> {
+export interface Routine extends Pick<Exercise, 'id' | 'name'>, SetRecord {
   sets: number,
   record: SetRecord[],
 }
 
-export interface Session extends Omit<Workout, 'id' | 'username'> {
+export interface Session extends Omit<Workout, 'id'> {
   itinerary: Routine[],
 }
