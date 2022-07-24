@@ -1,16 +1,13 @@
-import { shallowEqual } from 'react-redux';
-import type { Routine } from '@shared/types';
-import Exercise from '../components/Exercise';
-import NavComponent from '../components/NavComponent';
-import { useAppSelector } from '../hooks';
+import Routine from '../routines/Routine';
+import NavComponent from '../../common/NavComponent';
+import { useAppSelector } from '../../common/hooks';
 
 export default function SessionContainer() {
   const itineraryIds: number[] = useAppSelector(
-    (state) => state.workout.itinerary.map((routine: Routine) => routine.id),
-    shallowEqual,
+    (state) => state.programs.ids,
   );
   const data: JSX.Element[] = itineraryIds.map(
-    (id: number, index: number) => <Exercise index={index} key={id} />,
+    (id: number, index: number) => <Routine id={id} index={index} key={id} />,
   );
   return (
     <>

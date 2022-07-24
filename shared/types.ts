@@ -4,32 +4,50 @@ export interface Exercise {
   name: string,
 }
 
-export interface Set {
-  id: number,
-  exerciseId: number,
-  workoutId: number,
-  weight: number,
-  reps: number,
-}
-
-export interface Workout {
+export interface Program {
   id: number,
   startTime: string,
   endTime: string,
-  username: string,
 }
 
-// Not used in the data model, but on frontend and for returning from Server:
-export interface SetRecord {
+export interface Routine {
+  id: number,
+  exerciseId: number,
+  programId: number
+}
+
+export interface RoutineSet {
+  id: number,
+  routineId: number,
   weight: number,
   reps: number,
 }
 
-export interface Routine extends Pick<Exercise, 'id' | 'name'>, SetRecord {
-  sets: number,
-  record: SetRecord[],
+// Not used in the data model, but on frontend and for returning from Server:
+type ExerciseMap = Record<number, Exercise>;
+
+export interface ExerciseState {
+  ids: number[],
+  entities: ExerciseMap
 }
 
-export interface Session extends Omit<Workout, 'id'> {
-  itinerary: Routine[],
+type ProgramMap = Record<number, Program>;
+
+export interface ProgramState {
+  ids: number[],
+  entities: ProgramMap,
+}
+
+type RoutineMap = Record<number, Routine>;
+
+export interface RoutineState {
+  ids: number[],
+  entities: RoutineMap
+}
+
+type RoutineSetMap = Record<number, RoutineSet>;
+
+export interface RoutineSetState {
+  ids: number[],
+  entities: RoutineSetMap
 }

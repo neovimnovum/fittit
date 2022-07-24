@@ -1,13 +1,12 @@
-import type { Routine } from '@shared/types';
 import { useState } from 'react';
-import { useAppSelector, useAppDispatch } from '../hooks';
-import { logSet } from '../lifts/liftSlice';
+import { useAppSelector, useAppDispatch } from '../../common/hooks';
 
 interface ExerciseProps {
+  id: number,
   index: number
 }
 
-function Exercise({ index }: ExerciseProps) {
+function Routine({ index, id }: ExerciseProps) {
   const routine: Routine = useAppSelector(
     (state) => {
       const item = state.workout.itinerary[index];
@@ -25,6 +24,8 @@ function Exercise({ index }: ExerciseProps) {
   const [sets, setSets] = useState(routine.sets);
   const [reps, setReps] = useState(routine.reps);
   const [weight, setWeight] = useState(routine.weight);
+
+  const setList: JSX.Element[] = [];
 
   return (
     <form

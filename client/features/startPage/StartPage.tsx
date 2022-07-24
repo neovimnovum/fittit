@@ -1,4 +1,4 @@
-import NavComponent from '../components/NavComponent';
+import NavComponent from '../../common/NavComponent';
 
 function MainContainer() {
   return (
