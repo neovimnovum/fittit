@@ -1,8 +1,8 @@
 import type {
-  ExerciseState, ProgramState, RoutineState, RoutineSetState,
+  ExercisesState, ProgramsState, RoutinesState, RoutineSetsState,
 } from '@shared/types';
 
-export const demoExerciseState: ExerciseState = {
+export const demoExercisesState: ExercisesState = {
   ids: [0, 1, 4],
   entities: {
     0: {
@@ -20,7 +20,7 @@ export const demoExerciseState: ExerciseState = {
   },
 };
 
-export const demoProgramState: ProgramState = {
+export const demoProgramsState: ProgramsState = {
   ids: [3, 4, 2],
   entities: {
     2: {
@@ -41,7 +41,7 @@ export const demoProgramState: ProgramState = {
   },
 };
 
-export const demoRoutineState: RoutineState = {
+export const demoRoutinesState: RoutinesState = {
   ids: [3, 2, 1],
   entities: {
     3: {
@@ -62,7 +62,7 @@ export const demoRoutineState: RoutineState = {
   },
 };
 
-export const demoRoutineSetState: RoutineSetState = {
+export const demoRoutineSetsState: RoutineSetsState = {
   ids: [4, 7, 9],
   entities: {
     4: {

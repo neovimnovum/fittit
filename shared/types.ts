@@ -26,28 +26,28 @@ export interface RoutineSet {
 // Not used in the data model, but on frontend and for returning from Server:
 type ExerciseMap = Record<number, Exercise>;
 
-export interface ExerciseState {
+export interface ExercisesState {
   ids: number[],
   entities: ExerciseMap
 }
 
 type ProgramMap = Record<number, Program>;
 
-export interface ProgramState {
+export interface ProgramsState {
   ids: number[],
   entities: ProgramMap,
 }
 
 type RoutineMap = Record<number, Routine>;
 
-export interface RoutineState {
+export interface RoutinesState {
   ids: number[],
   entities: RoutineMap
 }
 
 type RoutineSetMap = Record<number, RoutineSet>;
 
-export interface RoutineSetState {
+export interface RoutineSetsState {
   ids: number[],
   entities: RoutineSetMap
 }

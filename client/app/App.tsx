@@ -9,7 +9,7 @@ function App() {
     <Routes>
       <Route path="/" element={<StartPage />} />
       <Route path="/login" element={<LoginContainer />} />
-      <Route path="/workout" element={<Session />} />
+      <Route path="/workout" element={<Session programId={2} />} />
       <Route path="/history" element={<Programs />} />
     </Routes>
   );

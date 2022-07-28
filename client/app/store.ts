@@ -1,9 +1,15 @@
 import { configureStore } from '@reduxjs/toolkit';
-import programReducer from '../features/programs/programSlice';
+import exercisesReducer from '../features/exercises/exercisesSlice';
+import programsReducer from '../features/programs/programsSlice';
+import routinesReducer from '../features/routines/routinesSlice';
+import routineSetsReducer from '../features/routineSets/routineSetsSlice';
 
 const store = configureStore({
   reducer: {
-    programs: programReducer,
+    exercises: exercisesReducer,
+    programs: programsReducer,
+    routines: routinesReducer,
+    routineSets: routineSetsReducer,
   },
 });
 

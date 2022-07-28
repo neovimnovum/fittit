@@ -1,14 +1,18 @@
+import { shallowEqual } from 'react-redux';
 import Routine from '../routines/Routine';
 import NavComponent from '../../common/NavComponent';
 import { useAppSelector } from '../../common/hooks';
 
-export default function SessionContainer() {
-  const itineraryIds: number[] = useAppSelector(
-    (state) => state.programs.ids,
-  );
-  const data: JSX.Element[] = itineraryIds.map(
-    (id: number, index: number) => <Routine id={id} index={index} key={id} />,
-  );
+interface SessionProps {
+  programId: number,
+}
+
+export default function Session({ programId }: SessionProps) {
+  const routineIds = useAppSelector((state) => {
+    const { ids } = state.routines;
+    return ids.filter((id) => state.routines.entities[id]?.programId === programId);
+  }, shallowEqual);
+  const data: JSX.Element[] = routineIds.map((id) => <Routine id={id} key={id} />);
   return (
     <>
       {data}

@@ -1,6 +1,6 @@
 import NavComponent from '../../common/NavComponent';
 
-function MainContainer() {
+export default function StartPage() {
   return (
     <>
       <NavComponent
@@ -18,5 +18,3 @@ function MainContainer() {
     </>
   );
 }
-
-export default MainContainer;
