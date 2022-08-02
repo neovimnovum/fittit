@@ -1,17 +1,17 @@
-// import { useAppDispatch } from '../hooks';
+import { useAppSelector } from '../../common/hooks';
+import { routineSetsSelectors } from './routineSetsSlice';
 // setIndex: number,
 // exerciseIndex: number,
 
 interface SetProps {
-  id: number,
-  weight: number,
-  reps: number,
+  id: number | string,
 }
 
-function Set({
-  id, weight, reps,
-}: SetProps) {
-  // const dispatch = useAppDispatch();
+function Set({ id }: SetProps) {
+  const routineSet = useAppSelector((state) => routineSetsSelectors.selectById(state, id));
+  if (!routineSet) {
+    return null;
+  }
   return (
     <form
       style={{ alignItems: 'center', display: 'flex', flexDirection: 'column' }}
@@ -25,12 +25,12 @@ function Set({
       <label htmlFor={`reps${id}`}>
         Reps:
         {' '}
-        <input id={`reps${id}`} defaultValue={reps} type="number" />
+        <input id={`reps${id}`} defaultValue={routineSet.reps} type="number" />
       </label>
       <label htmlFor={`weight${id}`}>
         Weight:
         {' '}
-        <input id={`weight${id}`} defaultValue={weight} type="number" />
+        <input id={`weight${id}`} defaultValue={routineSet.weight} type="number" />
       </label>
       <button type="submit">Update Set</button>
       <button type="button">Delete Set</button>
